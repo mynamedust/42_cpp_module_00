@@ -1,25 +1,38 @@
 #ifndef CONTACT_HPP
 #define CONTACT_HPP
 
+#include <iostream>
+#include <iomanip>
+
 class Contact {
+private:
+	int index;
 	std::string firstName;
 	std::string lastName;
 	std::string nickname;
 	std::string phoneNumber;
 	std::string darkestSecret;
 
-	void setFirstName(std::string first);
+	void setFirstName();
 
-	void setLastName(std::string last);
+	void setLastName();
 
-	void setNickname(std::string nickname);
+	void setNickname();
 
-	void setPhoneNumber(std::string number);
+	void setPhoneNumber();
 
-	void setDarkestSecret(std::string secret);
+	void setDarkestSecret();
+
+	void tablePrintField(std::string str);
+
+	std::string userInsert();
 
 public:
-	void setContact();
+	bool fillContact(int idx);
+
+	void print();
+
+	void tablePrint();
 };
 
-#endif CONTACT_HPP
+#endif
