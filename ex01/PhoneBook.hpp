@@ -10,10 +10,13 @@ private:
 	int index;
 	Contact contacts[8];
 
-	void print();
+	void printContactsTable();
 
 	void headerPrint();
 
+	void findIndexContact();
+
+	void findIndexContact(std::string const &buff);
 public:
 	PhoneBook();
 

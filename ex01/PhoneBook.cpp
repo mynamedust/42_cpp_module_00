@@ -1,4 +1,5 @@
 #include "PhoneBook.hpp"
+#include <stdlib.h>
 
 PhoneBook::PhoneBook() {
 	count = 0;
@@ -9,6 +10,10 @@ void PhoneBook::addContact() {
 	Contact contact;
 	int idx;
 
+	if (!contact.fillContact()) {
+		std::cout << "Creating failed. Contact can’t have empty fields." << std::endl;
+		return;
+	}
 	if (count < 8)
 		idx = count++;
 	else {
@@ -16,10 +21,7 @@ void PhoneBook::addContact() {
 			index = 0;
 		idx = index;
 	}
-	if (!contact.fillContact(idx)) {
-		std::cout << "Creating failed. Contact can’t have empty fields.";
-		return;
-	}
+	contact.setIndex(idx);
 	contacts[index++] = contact;
 }
 
@@ -30,19 +32,39 @@ void PhoneBook::headerPrint() {
 	std::cout << std::right << std::setw(10) << "NICKNAME" << '|' << std::endl;
 }
 
-void PhoneBook::print() {
-	if (count == 0) {
-		std::cout << "Phone Book is empty now\n";
-		return;
-	}
+void PhoneBook::printContactsTable() {
 	headerPrint();
 	for (int i = 0; i < count; i++) {
 		contacts[i].tablePrint();
 	}
 }
 
-void PhoneBook::searchContact() {
-	print();
-}
+void PhoneBook::findIndexContact(std::string const & buff) {
+	int idx;
+	int i = 0;
 
-#include "PhoneBook.hpp"
+	while (buff[i]) {
+		if (!isdigit(buff[i]))
+			break;
+		i++;
+	}
+	idx = atoi(buff.c_str());
+	if (idx >= count || idx < 0 || static_cast<std::string::size_type>(i) < buff.size() || buff.size() == 0) {
+		std::cout << "Invalid index argument." << std::endl;
+		return;
+	}
+	contacts[idx].printContact();
+};
+
+void PhoneBook::searchContact() {
+	std::string buff;
+
+	if (count == 0) {
+		std::cout << "Phone Book is empty now.\n";
+		return;
+	}
+	printContactsTable();
+	std::cout << "Write the contact index: ";
+	getline(std::cin, buff);
+	findIndexContact(buff);
+}

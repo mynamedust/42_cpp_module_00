@@ -13,26 +13,20 @@ private:
 	std::string phoneNumber;
 	std::string darkestSecret;
 
-	void setFirstName();
-
-	void setLastName();
-
-	void setNickname();
-
-	void setPhoneNumber();
-
-	void setDarkestSecret();
+	void setInfo(std::string &field, std::string const &message);
 
 	void tablePrintField(std::string str);
 
 	std::string userInsert();
 
 public:
-	bool fillContact(int idx);
+	bool fillContact();
 
-	void print();
+	void printContact();
 
 	void tablePrint();
+
+	void setIndex(int const idx);
 };
 
 #endif
