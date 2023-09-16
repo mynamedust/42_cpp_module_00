@@ -1,5 +1,7 @@
 NAME		=	phonebook
 SRCS		=	$(wildcard ./*.cpp)
+HEADERS		=	$(wildcard ./*.hpp)
+MAKEFILE	=	./Makefile
 OBJS_DIR	=	./obj
 OBJS		=	$(SRCS:./%.cpp=$(OBJS_DIR)/%.o)
 CC			=	c++
@@ -7,7 +9,7 @@ CFLAGS		=	-Wall -Wextra -Werror -std=c++98 -I ./
 
 all: $(NAME)
 
-$(NAME): $(OBJS_DIR) $(OBJS) $(SRCS)
+$(NAME): $(OBJS_DIR) $(OBJS) $(SRCS) $(HEADERS) $(MAKEFILE)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 $(OBJS_DIR):
